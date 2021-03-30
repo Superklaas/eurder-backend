@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserMapper {
 
-    public User toUser(CreateUserDto dto) {
+    public User toCustomer(CreateUserDto dto) {
         return new User(
                 dto.getFirstName(),
                 dto.getLastName(),

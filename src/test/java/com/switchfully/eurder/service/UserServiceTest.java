@@ -23,8 +23,10 @@ class UserServiceTest {
         userService = new UserService(userRepository);
     }
 
-//    @Test
-//    void createUser() {
-//        when(userRepository.save(user)).thenReturn()
-//    }
+    @Test
+    void createUser() {
+        when(userRepository.save(user)).thenReturn(user);
+        assertEquals(user,userService.createUser(user));
+    }
+
 }

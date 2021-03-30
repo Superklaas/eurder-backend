@@ -28,7 +28,8 @@ public class UserRepository {
         return userMap;
     }
 
-    public void save(User newCustomer) {
+    public User save(User newCustomer) {
         userMap.put(newCustomer.getId(),newCustomer);
+        return newCustomer;
     }
 }

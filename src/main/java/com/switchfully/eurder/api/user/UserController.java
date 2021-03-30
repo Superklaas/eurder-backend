@@ -1,6 +1,5 @@
 package com.switchfully.eurder.api.user;
 
-import com.switchfully.eurder.domain.User;
 import com.switchfully.eurder.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,9 +21,7 @@ public class UserController {
     @PostMapping(consumes = "application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public UserDto createNewCustomer(@RequestBody CreateUserDto input) {
-        User user = userMapper.toUser(input);
-        userService.createUser(user);
-        return userMapper.toDto(user);
+        return userMapper.toDto(userService.createUser(userMapper.toCustomer(input)));
     }
 
 

@@ -5,6 +5,8 @@ import com.switchfully.eurder.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Book;
+
 @Service
 public class UserService {
 
@@ -16,7 +18,7 @@ public class UserService {
     }
 
 
-    public void createUser(User newCustomer) {
-        userRepository.save(newCustomer);
+    public User createUser(User newCustomer) {
+        return userRepository.save(newCustomer);
     }
 }
