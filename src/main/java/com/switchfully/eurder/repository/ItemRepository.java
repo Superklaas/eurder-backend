@@ -27,4 +27,9 @@ public class ItemRepository {
     public Map<String, Item> getItemMap() {
         return itemMap;
     }
+
+    public Item save(Item item) {
+        itemMap.put(item.getId(),item);
+        return item;
+    }
 }

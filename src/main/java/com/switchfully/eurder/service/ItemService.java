@@ -1,5 +1,6 @@
 package com.switchfully.eurder.service;
 
+import com.switchfully.eurder.domain.Item;
 import com.switchfully.eurder.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,5 +16,7 @@ public class ItemService {
     }
 
 
-
+    public Item createItem(Item item) {
+        return itemRepository.save(item);
+    }
 }
