@@ -23,4 +23,8 @@ public class UserRepository {
                     .forEach(user -> userMap.put(user.getId(), user));
         }
     }
+
+    public Map<String, User> getUserMap() {
+        return userMap;
+    }
 }
