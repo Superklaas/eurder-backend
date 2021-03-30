@@ -27,4 +27,8 @@ public class UserRepository {
     public Map<String, User> getUserMap() {
         return userMap;
     }
+
+    public void save(User newCustomer) {
+        userMap.put(newCustomer.getId(),newCustomer);
+    }
 }
