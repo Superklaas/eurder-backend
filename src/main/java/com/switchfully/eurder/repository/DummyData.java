@@ -1,5 +1,6 @@
 package com.switchfully.eurder.repository;
 
+import com.switchfully.eurder.domain.Item;
 import com.switchfully.eurder.domain.User;
 import com.switchfully.eurder.domain.UserType;
 import org.springframework.context.annotation.Bean;
@@ -15,11 +16,17 @@ public class DummyData {
             "één@dummy.be", UserType.CUSTOMER);
     private final User user2 = new User("twee","dummy","abdijstraat 1","056786543",
             "twee@dummy.be", UserType.ADMIN);
+    private final Item item1 = new Item("appel","lekker",2,20);
+    private final Item item2 = new Item("peer","lekker",2,20);
 
     @Bean
     public List<User> getUsers() {
         return List.of(user1,user2);
     }
 
+    @Bean
+    public List<Item> getItems() {
+        return List.of(item1,item2);
+    }
 
 }
