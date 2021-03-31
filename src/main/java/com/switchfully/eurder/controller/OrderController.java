@@ -33,8 +33,8 @@ public class OrderController {
     @PostMapping(consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public OrderDto createOrder(@RequestBody List<OrderUnitDto> orderUnitDtos,
-                                @RequestHeader String userId) {
-        User user = userService.assertRegisteredUser(userId);
+                                @RequestHeader String authToken) {
+        User user = userService.assertRegisteredUser(authToken);
         List<OrderUnit> orderUnits = orderService.createOrderUnitFromInput(orderUnitDtos);
         List<OrderUnit> orderUnitsWithShippingDate = orderService.calculateShippingDate(orderUnits);
         Order order = orderService.createOrder(orderUnitsWithShippingDate,user);

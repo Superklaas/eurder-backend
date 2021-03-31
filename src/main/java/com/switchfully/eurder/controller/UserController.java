@@ -31,17 +31,17 @@ public class UserController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<UserDto> getAllUsers(@RequestHeader String userId) {
-        userService.assertAdmin(userId);
+    public List<UserDto> getAllUsers(@RequestHeader String authToken) {
+        userService.assertAdmin(authToken);
         return userMapper.toDto(userService.getAllUsers());
     }
 
     @GetMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public UserDto getUserById(@PathVariable("id") String queryId,
-                               @RequestHeader String userId) {
-        userService.assertAdmin(userId);
-        return userMapper.toDto(userService.getUserById(queryId));
+    public UserDto getUserById(@PathVariable("id") String id,
+                               @RequestHeader String authToken) {
+        userService.assertAdmin(authToken);
+        return userMapper.toDto(userService.getUserById(id));
     }
 
 

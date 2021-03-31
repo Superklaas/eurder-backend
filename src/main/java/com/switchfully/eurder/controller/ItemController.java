@@ -29,15 +29,15 @@ public class ItemController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ItemDto createItem(@RequestBody CreateItemDto input,
-                              @RequestHeader String userId) {
-        userService.assertAdmin(userId);
+                              @RequestHeader String authToken) {
+        userService.assertAdmin(authToken);
         return itemMapper.toDto(itemService.createItem(itemMapper.toItem(input)));
     }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<ItemDto> getAllItems(@RequestHeader String userId) {
-        userService.assertAdmin(userId);
+    public List<ItemDto> getAllItems(@RequestHeader String authToken) {
+        userService.assertAdmin(authToken);
         return itemMapper.toDto(itemService.getAllItems());
     }
 
