@@ -36,6 +36,7 @@ public class OrderController {
         List<OrderUnit> orderUnits = orderMapper.toOrderUnit(orderUnitDtos);
         List<OrderUnit> orderUnitsWithShippingDate = orderService.calculateShippingDate(orderUnits);
         Order order = orderService.createOrder(orderUnitsWithShippingDate,user);
+        orderService.saveOrder(order);
         return orderMapper.toDto(order);
     }
 

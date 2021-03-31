@@ -43,4 +43,8 @@ public class OrderService {
                 .map(unit -> unit.getItem().getPrice()* unit.getAmount())
                 .reduce(0.0,Double::sum);
     }
+
+    public Order saveOrder(Order order) {
+        return orderRepository.save(order);
+    }
 }

@@ -28,4 +28,7 @@ public class OrderRepository {
         return orderMap;
     }
 
+    public Order save(Order order) {
+        return orderMap.put(order.getId(), order);
+    }
 }
