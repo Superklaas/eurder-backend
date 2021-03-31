@@ -36,6 +36,14 @@ public class UserController {
         return userMapper.toDto(userService.getAllUsers());
     }
 
+    @GetMapping(path = "/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public UserDto getUserById(@PathVariable("id") String queryId,
+                               @RequestHeader String userId) {
+        userService.assertAdmin(userId);
+        return userMapper.toDto(userService.getUserById(queryId));
+    }
+
 
 
 

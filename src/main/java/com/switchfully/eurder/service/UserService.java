@@ -46,4 +46,8 @@ public class UserService {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You have no rights to do this");
         }
     }
+
+    public User getUserById(String id) {
+        return userRepository.getUserById(id);
+    }
 }

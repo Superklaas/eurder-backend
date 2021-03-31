@@ -30,8 +30,8 @@ public class UserRepository {
         return newCustomer;
     }
 
-    public User getUserById(String userId) {
-        return userMap.get(userId);
+    public User getUserById(String id) {
+        return userMap.get(id);
     }
 
     public List<User> findAll() {
