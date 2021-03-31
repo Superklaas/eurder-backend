@@ -4,11 +4,11 @@ import com.switchfully.eurder.domain.Item;
 
 public class OrderUnitDto {
 
-    private Item item;
+    private String name;
     private int amount;
 
-    public Item getItem() {
-        return item;
+    public String getName() {
+        return name;
     }
 
     public int getAmount() {

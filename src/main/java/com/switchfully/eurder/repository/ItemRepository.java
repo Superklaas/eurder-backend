@@ -33,4 +33,10 @@ public class ItemRepository {
     public List<Item> findAll() {
         return new ArrayList<>(itemMap.values());
     }
+
+    public Item getItemByName(String name) {
+        return itemMap.values().stream()
+                .filter(item -> item.getName().equals(name))
+                .findAny().orElseThrow();
+    }
 }

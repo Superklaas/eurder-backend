@@ -1,7 +1,5 @@
 package com.switchfully.eurder.api.order_api;
 
-import com.switchfully.eurder.api.item_api.CreateItemDto;
-import com.switchfully.eurder.api.item_api.ItemDto;
 import com.switchfully.eurder.domain.Order;
 import com.switchfully.eurder.domain.OrderUnit;
 import com.switchfully.eurder.domain.User;
@@ -9,6 +7,7 @@ import com.switchfully.eurder.service.OrderService;
 import com.switchfully.eurder.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,15 +27,14 @@ public class OrderController {
         this.userService = userService;
     }
 
-    @PostMapping(consumes="application/json", produces = "application/json")
+    @PostMapping(consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public OrderDto createOrder(@RequestBody List<OrderUnitDto> orderUnitDtos,
-                                @RequestParam String userId) {
+                                @RequestHeader String userId) {
         User user = userService.assertRegisteredUser(userId);
-        List<OrderUnit> orderUnits = orderMapper.toOrderUnit(orderUnitDtos);
+        List<OrderUnit> orderUnits = orderService.createOrderUnitFromInput(orderUnitDtos);
         List<OrderUnit> orderUnitsWithShippingDate = orderService.calculateShippingDate(orderUnits);
         Order order = orderService.createOrder(orderUnitsWithShippingDate,user);
-        orderService.saveOrder(order);
         return orderMapper.toDto(order);
     }
 

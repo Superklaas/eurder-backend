@@ -10,14 +10,6 @@ import java.util.stream.Collectors;
 @Component
 public class OrderMapper {
 
-    public OrderUnit toOrderUnit(OrderUnitDto orderUnitDto) {
-        return new OrderUnit(orderUnitDto.getItem(), orderUnitDto.getAmount());
-    }
-
-    public List<OrderUnit> toOrderUnit(List<OrderUnitDto> orderUnitDtoList) {
-        return orderUnitDtoList.stream().map(this::toOrderUnit).collect(Collectors.toList());
-    }
-
     public OrderDto toDto(Order order) {
         return new OrderDto()
                 .setId(order.getId())

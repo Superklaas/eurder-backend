@@ -1,7 +1,6 @@
 package com.switchfully.eurder.domain;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 public class OrderUnit {
 
