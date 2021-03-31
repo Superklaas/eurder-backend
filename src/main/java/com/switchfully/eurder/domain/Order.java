@@ -5,9 +5,9 @@ import java.util.UUID;
 
 public class Order {
 
-    private String id;
-    private List<OrderUnit> orderUnits;
-    private User user;
+    private final String id;
+    private final List<OrderUnit> orderUnits;
+    private final User user;
     private double totalPrice;
 
     public Order(List<OrderUnit> orderUnits, User user) {
