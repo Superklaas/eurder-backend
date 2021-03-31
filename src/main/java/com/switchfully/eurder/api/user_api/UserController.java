@@ -1,4 +1,4 @@
-package com.switchfully.eurder.api.user;
+package com.switchfully.eurder.api.user_api;
 
 import com.switchfully.eurder.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

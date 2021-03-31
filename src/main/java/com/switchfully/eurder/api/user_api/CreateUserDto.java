@@ -1,4 +1,4 @@
-package com.switchfully.eurder.api.user;
+package com.switchfully.eurder.api.user_api;
 
 public class CreateUserDto {
 

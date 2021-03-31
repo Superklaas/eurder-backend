@@ -1,4 +1,4 @@
-package com.switchfully.eurder.api.item;
+package com.switchfully.eurder.api.item_api;
 
 import com.switchfully.eurder.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;

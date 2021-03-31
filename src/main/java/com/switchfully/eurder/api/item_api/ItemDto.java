@@ -1,4 +1,4 @@
-package com.switchfully.eurder.api.item;
+package com.switchfully.eurder.api.item_api;
 
 public class ItemDto {
 
