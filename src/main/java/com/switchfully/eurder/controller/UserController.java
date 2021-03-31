@@ -31,7 +31,8 @@ public class UserController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<UserDto> getAllUsers() {
+    public List<UserDto> getAllUsers(@RequestHeader String userId) {
+        userService.assertAdmin(userId);
         return userMapper.toDto(userService.getAllUsers());
     }
 
