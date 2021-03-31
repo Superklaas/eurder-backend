@@ -10,9 +10,9 @@ import java.util.List;
 @Configuration
 public class DummyData {
 
-    private final User user1 = new User("één","dummy","abdijstraat 1","056786543",
+    private final User user1 = new User("1","één","dummy","abdijstraat 1","056786543",
             "één@dummy.be", UserType.CUSTOMER);
-    private final User user2 = new User("twee","dummy","abdijstraat 1","056786543",
+    private final User user2 = new User("2","twee","dummy","abdijstraat 1","056786543",
             "twee@dummy.be", UserType.ADMIN);
 
     private final Item item1 = new Item("appel","lekker",2,20);

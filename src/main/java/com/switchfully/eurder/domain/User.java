@@ -23,6 +23,18 @@ public class User {
         this.userType = userType;
     }
 
+    // constructor for dummy data
+    public User(String id, String firstName, String lastName, String address, String phoneNumber, String emailAddress,
+                UserType userType) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.emailAddress = emailAddress;
+        this.userType = userType;
+    }
+
     public String getId() {
         return id;
     }
