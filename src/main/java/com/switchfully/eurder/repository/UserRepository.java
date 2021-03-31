@@ -32,4 +32,8 @@ public class UserRepository {
         userMap.put(newCustomer.getId(),newCustomer);
         return newCustomer;
     }
+
+    public User getUserById(String userId) {
+        return userMap.get(userId);
+    }
 }

@@ -21,4 +21,12 @@ public class UserService {
     public User createUser(User newCustomer) {
         return userRepository.save(newCustomer);
     }
+
+    public User assertRegisteredUser(String userId) {
+        User user = userRepository.getUserById(userId);
+        if(user == null) {
+            throw new IllegalArgumentException("User does not exist in map");
+        }
+        return user;
+    }
 }
