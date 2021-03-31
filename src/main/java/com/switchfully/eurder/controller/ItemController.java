@@ -36,7 +36,8 @@ public class ItemController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<ItemDto> getAllItems() {
+    public List<ItemDto> getAllItems(@RequestHeader String userId) {
+        userService.assertAdmin(userId);
         return itemMapper.toDto(itemService.getAllItems());
     }
 
