@@ -40,11 +40,12 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public void assertAdmin(String userId) {
+    public User assertAdmin(String userId) {
         User user = userRepository.getUserById(userId);
         if (!user.getUserType().equals(ADMIN)) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You have no rights to do this");
         }
+        return user;
     }
 
     public User getUserById(String id) {
