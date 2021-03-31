@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.awt.print.Book;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -28,5 +29,9 @@ public class UserService {
             throw new IllegalArgumentException("User does not exist in map");
         }
         return user;
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 }

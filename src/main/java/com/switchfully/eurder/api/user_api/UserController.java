@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -23,6 +25,13 @@ public class UserController {
     public UserDto createNewCustomer(@RequestBody CreateUserDto input) {
         return userMapper.toDto(userService.createUser(userMapper.toCustomer(input)));
     }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<UserDto> getAllUsers() {
+        return userMapper.toDto(userService.getAllUsers());
+    }
+
 
 
 

@@ -4,10 +4,7 @@ import com.switchfully.eurder.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @Repository
 public class UserRepository {
@@ -35,5 +32,9 @@ public class UserRepository {
 
     public User getUserById(String userId) {
         return userMap.get(userId);
+    }
+
+    public List<User> findAll() {
+        return new ArrayList<>(userMap.values());
     }
 }

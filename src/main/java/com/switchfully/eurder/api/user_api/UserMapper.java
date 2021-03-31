@@ -4,6 +4,9 @@ import com.switchfully.eurder.domain.User;
 import com.switchfully.eurder.domain.UserType;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class UserMapper {
 
@@ -27,6 +30,10 @@ public class UserMapper {
                 .setPhoneNumber(user.getPhoneNumber())
                 .setEmailAddress(user.getEmailAddress())
                 .setUserType(user.getUserType());
+    }
+
+    public List<UserDto> toDto(List<User> users) {
+        return users.stream().map(this::toDto).collect(Collectors.toList());
     }
 
 }
