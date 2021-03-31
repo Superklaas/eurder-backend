@@ -4,6 +4,7 @@ import com.switchfully.eurder.api.item_api.CreateItemDto;
 import com.switchfully.eurder.api.item_api.ItemDto;
 import com.switchfully.eurder.domain.Order;
 import com.switchfully.eurder.domain.OrderUnit;
+import com.switchfully.eurder.domain.User;
 import com.switchfully.eurder.service.OrderService;
 import com.switchfully.eurder.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,15 +28,15 @@ public class OrderController {
         this.userService = userService;
     }
 
-    @PostMapping
+    @PostMapping(consumes="application/json", produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    public OrderDto createOrder(@RequestBody List<OrderUnitDto> orderUnitDtoList,
+    public OrderDto createOrder(@RequestBody List<OrderUnitDto> orderUnitDtos,
                                 @RequestParam String userId) {
-        userService.assertRegisteredUser(userId);
-        List<OrderUnit> orderUnitList = orderMapper.toOrderUnit(orderUnitDtoList);
-        List<OrderUnit> orderUnitListWithShippingDate = orderService.calculateShippingDate(orderUnitList);
-        Order order = orderService.createOrder(orderUnitListWithShippingDate);
-        return null;
+        User user = userService.assertRegisteredUser(userId);
+        List<OrderUnit> orderUnits = orderMapper.toOrderUnit(orderUnitDtos);
+        List<OrderUnit> orderUnitsWithShippingDate = orderService.calculateShippingDate(orderUnits);
+        Order order = orderService.createOrder(orderUnitsWithShippingDate,user);
+        return orderMapper.toDto(order);
     }
 
 }
