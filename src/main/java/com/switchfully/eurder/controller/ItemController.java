@@ -1,5 +1,8 @@
-package com.switchfully.eurder.api.item_api;
+package com.switchfully.eurder.controller;
 
+import com.switchfully.eurder.dto.CreateItemDto;
+import com.switchfully.eurder.dto.ItemDto;
+import com.switchfully.eurder.mapper.ItemMapper;
 import com.switchfully.eurder.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

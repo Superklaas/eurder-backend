@@ -1,4 +1,4 @@
-package com.switchfully.eurder.api.user_api;
+package com.switchfully.eurder.dto;
 
 import com.switchfully.eurder.domain.UserType;
 

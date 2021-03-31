@@ -1,5 +1,8 @@
-package com.switchfully.eurder.api.user_api;
+package com.switchfully.eurder.controller;
 
+import com.switchfully.eurder.dto.CreateUserDto;
+import com.switchfully.eurder.dto.UserDto;
+import com.switchfully.eurder.mapper.UserMapper;
 import com.switchfully.eurder.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,11 +1,8 @@
-package com.switchfully.eurder.api.order_api;
+package com.switchfully.eurder.mapper;
 
 import com.switchfully.eurder.domain.Order;
-import com.switchfully.eurder.domain.OrderUnit;
+import com.switchfully.eurder.dto.OrderDto;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class OrderMapper {

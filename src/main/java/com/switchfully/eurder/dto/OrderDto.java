@@ -1,4 +1,4 @@
-package com.switchfully.eurder.api.order_api;
+package com.switchfully.eurder.dto;
 
 import com.switchfully.eurder.domain.OrderUnit;
 import com.switchfully.eurder.domain.User;

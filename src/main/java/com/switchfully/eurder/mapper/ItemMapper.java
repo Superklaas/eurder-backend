@@ -1,6 +1,8 @@
-package com.switchfully.eurder.api.item_api;
+package com.switchfully.eurder.mapper;
 
 import com.switchfully.eurder.domain.Item;
+import com.switchfully.eurder.dto.CreateItemDto;
+import com.switchfully.eurder.dto.ItemDto;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

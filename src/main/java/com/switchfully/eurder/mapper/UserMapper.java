@@ -1,7 +1,9 @@
-package com.switchfully.eurder.api.user_api;
+package com.switchfully.eurder.mapper;
 
 import com.switchfully.eurder.domain.User;
 import com.switchfully.eurder.domain.UserType;
+import com.switchfully.eurder.dto.CreateUserDto;
+import com.switchfully.eurder.dto.UserDto;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
