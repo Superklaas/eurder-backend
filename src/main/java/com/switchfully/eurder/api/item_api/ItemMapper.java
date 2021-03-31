@@ -3,6 +3,9 @@ package com.switchfully.eurder.api.item_api;
 import com.switchfully.eurder.domain.Item;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class ItemMapper {
 
@@ -13,6 +16,10 @@ public class ItemMapper {
                 .setDescription(item.getDescription())
                 .setPrice(item.getPrice())
                 .setStock(item.getStock());
+    }
+
+    public List<ItemDto> toDto(List<Item> items) {
+        return items.stream().map(this::toDto).collect(Collectors.toList());
     }
 
     public Item toItem(CreateItemDto dto) {

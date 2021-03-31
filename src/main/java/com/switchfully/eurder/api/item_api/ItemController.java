@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/items")
 public class ItemController {
@@ -22,6 +24,12 @@ public class ItemController {
     @ResponseStatus(HttpStatus.CREATED)
     public ItemDto createItem(@RequestBody CreateItemDto input) {
         return itemMapper.toDto(itemService.createItem(itemMapper.toItem(input)));
+    }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<ItemDto> getAllItems() {
+        return itemMapper.toDto(itemService.getAllItems());
     }
 
 

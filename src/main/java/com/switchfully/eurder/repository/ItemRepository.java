@@ -4,10 +4,7 @@ import com.switchfully.eurder.domain.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @Repository
 public class ItemRepository {
@@ -31,5 +28,9 @@ public class ItemRepository {
     public Item save(Item item) {
         itemMap.put(item.getId(),item);
         return item;
+    }
+
+    public List<Item> findAll() {
+        return new ArrayList<>(itemMap.values());
     }
 }

@@ -5,6 +5,8 @@ import com.switchfully.eurder.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ItemService {
 
@@ -18,5 +20,9 @@ public class ItemService {
 
     public Item createItem(Item item) {
         return itemRepository.save(item);
+    }
+
+    public List<Item> getAllItems() {
+        return itemRepository.findAll();
     }
 }
