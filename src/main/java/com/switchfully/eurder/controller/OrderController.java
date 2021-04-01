@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/orders")
+@RequestMapping("orders")
 public class OrderController {
 
     private final OrderService orderService;
@@ -31,7 +31,7 @@ public class OrderController {
         this.userService = userService;
     }
 
-    @PostMapping(consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping("create")
     @ResponseStatus(HttpStatus.CREATED)
     public OrderDto createOrder(@RequestBody List<OrderUnitDto> orderUnitDtos,
                                 @RequestHeader String authToken) {
@@ -42,7 +42,7 @@ public class OrderController {
         return orderMapper.toDto(order);
     }
 
-    @GetMapping
+    @GetMapping("report")
     @ResponseStatus(HttpStatus.OK)
     public Report reportOrdersForOneUser(@RequestHeader String authToken) {
         User user = userService.assertRegisteredUser(authToken);

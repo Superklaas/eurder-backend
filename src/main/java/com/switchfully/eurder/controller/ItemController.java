@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/items")
+@RequestMapping("items")
 public class ItemController {
 
     private final ItemService itemService;
@@ -28,7 +28,7 @@ public class ItemController {
         this.userService = userService;
     }
 
-    @PostMapping
+    @PostMapping("create")
     @ResponseStatus(HttpStatus.CREATED)
     public ItemDto createItem(@RequestBody CreateItemDto input,
                               @RequestHeader String authToken) {
@@ -36,14 +36,14 @@ public class ItemController {
         return itemMapper.toDto(itemService.createItem(itemMapper.toItem(input)));
     }
 
-    @GetMapping
+    @GetMapping("getAll")
     @ResponseStatus(HttpStatus.OK)
     public List<ItemDto> getAllItems(@RequestHeader String authToken) {
         userService.assertAdmin(authToken);
         return itemMapper.toDto(itemService.getAllItems());
     }
 
-    @PutMapping(path = "/{id}")
+    @PutMapping(path = "update/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ItemDto updateItem(@PathVariable("id") String id,
                               @RequestBody UpdateItemDto updateItemDto,
