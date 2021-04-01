@@ -1,6 +1,7 @@
 package com.switchfully.eurder.controller;
 
 import com.switchfully.eurder.dto.OrderDto;
+import com.switchfully.eurder.dto.Report;
 import com.switchfully.eurder.mapper.OrderMapper;
 import com.switchfully.eurder.dto.OrderUnitDto;
 import com.switchfully.eurder.domain.Order;
@@ -39,6 +40,14 @@ public class OrderController {
         List<OrderUnit> orderUnitsWithShippingDate = orderService.calculateShippingDate(orderUnits);
         Order order = orderService.createOrder(orderUnitsWithShippingDate,user);
         return orderMapper.toDto(order);
+    }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public Report reportOrdersForOneUser(@RequestHeader String authToken) {
+        User user = userService.assertRegisteredUser(authToken);
+        List<Order> ordersByUser = orderService.getOrdersByUser(user);
+        return orderService.makeReport(ordersByUser);
     }
 
 }

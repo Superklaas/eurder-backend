@@ -5,6 +5,9 @@ import com.switchfully.eurder.domain.Item;
 import com.switchfully.eurder.domain.Order;
 import com.switchfully.eurder.domain.OrderUnit;
 import com.switchfully.eurder.domain.User;
+import com.switchfully.eurder.dto.Report;
+import com.switchfully.eurder.dto.ReportOrder;
+import com.switchfully.eurder.dto.ReportOrderUnit;
 import com.switchfully.eurder.repository.ItemRepository;
 import com.switchfully.eurder.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,25 +42,62 @@ public class OrderService {
 
     public Order createOrder(List<OrderUnit> orderUnitsWithShippingDate, User user) {
         Order order = new Order(orderUnitsWithShippingDate, user);
-        double totalPrice = getTotalPrice(orderUnitsWithShippingDate);
+        double totalPrice = calculatePriceOrder(orderUnitsWithShippingDate);
         order.setTotalPrice(totalPrice);
         return orderRepository.save(order);
     }
 
-    private double getTotalPrice(List<OrderUnit> orderUnitsWithShippingDate) {
-        return orderUnitsWithShippingDate.stream()
-                .map(unit -> unit.getItem().getPrice() * unit.getAmount())
-                .reduce(0.0, Double::sum);
-    }
-
-
     public List<OrderUnit> createOrderUnitFromInput(List<OrderUnitDto> orderUnitDtos) {
         List<OrderUnit> orderUnits = new ArrayList<>();
-        for(OrderUnitDto orderUnitDto : orderUnitDtos) {
+        for (OrderUnitDto orderUnitDto : orderUnitDtos) {
             Item item = itemRepository.getItemByName(orderUnitDto.getName());
             OrderUnit orderUnit = new OrderUnit(item, orderUnitDto.getAmount());
             orderUnits.add(orderUnit);
         }
         return orderUnits;
     }
+
+    public List<Order> getOrdersByUser(User user) {
+        return orderRepository.getOrdersByUser(user);
+    }
+
+    public Report makeReport(List<Order> ordersByUser) {
+        Report report = new Report();
+        List<ReportOrder> reportOrders = new ArrayList<>();
+        for (Order order : ordersByUser) {
+            ReportOrder reportOrder = new ReportOrder();
+            reportOrder.setOrderId(order.getId());
+            List<ReportOrderUnit> reportOrderUnits = new ArrayList<>();
+            for (OrderUnit orderUnit : order.getOrderUnits()) {
+                ReportOrderUnit reportOrderUnit = new ReportOrderUnit();
+                reportOrderUnit.setNameItem(orderUnit.getItem().getName());
+                reportOrderUnit.setAmount(orderUnit.getAmount());
+                reportOrderUnit.setPriceOrderUnit(calculatePriceOrderUnit(orderUnit));
+                reportOrderUnits.add(reportOrderUnit);
+            }
+            reportOrder.setReportOrderUnitDtos(reportOrderUnits);
+            reportOrder.setPriceOrder(calculatePriceOrder(order.getOrderUnits()));
+            reportOrders.add(reportOrder);
+        }
+        report.setReportOrderDtos(reportOrders);
+        report.setPriceAllOrders(calculatePriceAllOrders(ordersByUser));
+        return report;
+    }
+
+    private double calculatePriceOrderUnit(OrderUnit orderUnit) {
+        return orderUnit.getItem().getPrice() * orderUnit.getAmount();
+    }
+
+    private double calculatePriceOrder(List<OrderUnit> orderUnits) {
+        return orderUnits.stream()
+                .map(this::calculatePriceOrderUnit)
+                .reduce(0.0, Double::sum);
+    }
+
+    private double calculatePriceAllOrders(List<Order> orders) {
+        return orders.stream()
+                .map(order -> calculatePriceOrder(order.getOrderUnits()))
+                .reduce(0.0, Double::sum);
+    }
+
 }

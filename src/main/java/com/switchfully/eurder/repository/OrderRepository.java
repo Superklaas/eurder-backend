@@ -1,6 +1,7 @@
 package com.switchfully.eurder.repository;
 
 import com.switchfully.eurder.domain.Order;
+import com.switchfully.eurder.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -8,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Repository
 public class OrderRepository {
@@ -30,7 +32,12 @@ public class OrderRepository {
 
     public Order save(Order order) {
         orderMap.put(order.getId(), order);
-        System.out.println(orderMap.get(order.getId()));
         return order;
+    }
+
+    public List<Order> getOrdersByUser(User user) {
+        return orderMap.values().stream()
+                .filter(order -> order.getUser().equals(user))
+                .collect(Collectors.toList());
     }
 }
