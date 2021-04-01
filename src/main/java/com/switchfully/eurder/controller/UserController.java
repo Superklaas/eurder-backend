@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("users")
 public class UserController {
 
     private final UserService userService;
@@ -23,22 +23,22 @@ public class UserController {
         this.userMapper = userMapper;
     }
 
-    @PostMapping(consumes = "application/json", produces = "application/json")
+    @PostMapping("createCustomer")
     @ResponseStatus(HttpStatus.CREATED)
     public UserDto createNewCustomer(@RequestBody CreateUserDto input) {
         return userMapper.toDto(userService.createUser(userMapper.toCustomer(input)));
     }
 
-    @GetMapping
+    @GetMapping("getAll")
     @ResponseStatus(HttpStatus.OK)
     public List<UserDto> getAllUsers(@RequestHeader String authToken) {
         userService.assertAdmin(authToken);
         return userMapper.toDto(userService.getAllUsers());
     }
 
-    @GetMapping(path = "/{id}")
+    @GetMapping(path = "getById/{userId}")
     @ResponseStatus(HttpStatus.OK)
-    public UserDto getUserById(@PathVariable("id") String id,
+    public UserDto getUserById(@PathVariable("userId") String id,
                                @RequestHeader String authToken) {
         userService.assertAdmin(authToken);
         return userMapper.toDto(userService.getUserById(id));
