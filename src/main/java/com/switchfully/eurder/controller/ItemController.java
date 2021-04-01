@@ -1,7 +1,9 @@
 package com.switchfully.eurder.controller;
 
+import com.switchfully.eurder.domain.Item;
 import com.switchfully.eurder.dto.CreateItemDto;
 import com.switchfully.eurder.dto.ItemDto;
+import com.switchfully.eurder.dto.UpdateItemDto;
 import com.switchfully.eurder.mapper.ItemMapper;
 import com.switchfully.eurder.service.ItemService;
 import com.switchfully.eurder.service.UserService;
@@ -40,6 +42,18 @@ public class ItemController {
         userService.assertAdmin(authToken);
         return itemMapper.toDto(itemService.getAllItems());
     }
+
+    @PutMapping(path = "/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ItemDto updateItem(@PathVariable("id") String id,
+                              @RequestBody UpdateItemDto updateItemDto,
+                              @RequestHeader String authToken) {
+        userService.assertAdmin(authToken);
+        Item item = itemService.getItemById(id);
+        Item updatedItem = itemService.updateItem(item,updateItemDto);
+        return itemMapper.toDto(updatedItem);
+    }
+
 
 
 }

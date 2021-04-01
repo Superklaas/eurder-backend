@@ -2,7 +2,9 @@ package com.switchfully.eurder.repository;
 
 import com.switchfully.eurder.domain.Item;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
 
@@ -38,5 +40,12 @@ public class ItemRepository {
         return itemMap.values().stream()
                 .filter(item -> item.getName().equals(name))
                 .findAny().orElseThrow();
+    }
+
+    public Item findById(String id) {
+        if (itemMap.get(id) == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Item for id "+id+" does not exist");
+        }
+        return itemMap.get(id);
     }
 }
