@@ -11,11 +11,14 @@ import com.switchfully.eurder.dto.ReportOrderUnit;
 import com.switchfully.eurder.repository.ItemRepository;
 import com.switchfully.eurder.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderService {
@@ -112,4 +115,22 @@ public class OrderService {
                 .reduce(0.0, Double::sum);
     }
 
+    public Order getOrderById(String id) {
+        return orderRepository.getOrderById(id);
+    }
+
+    public Order assertOrderMadeByCurrentUser(Order previousOrder, User user) {
+        if (!previousOrder.getUser().equals(user)) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "This order was not made by this user");
+        }
+        return previousOrder;
+    }
+
+
+    public List<OrderUnit> updatePriceItems(List<OrderUnit> orderUnits) {
+        for(OrderUnit orderUnit : orderUnits) {
+            orderUnit.getItem().setPrice(orderUnit.getItem().getPrice());
+        }
+        return orderUnits;
+    }
 }

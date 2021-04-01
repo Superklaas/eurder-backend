@@ -40,4 +40,8 @@ public class OrderRepository {
                 .filter(order -> order.getUser().equals(user))
                 .collect(Collectors.toList());
     }
+
+    public Order getOrderById(String id) {
+        return orderMap.get(id);
+    }
 }

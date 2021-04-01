@@ -46,4 +46,9 @@ class OrderRepositoryTest {
     void getOrdersByUser() {
         assertEquals(orderList, orderRepository.getOrdersByUser(user));
     }
+
+    @Test
+    void getOrderById() {
+        assertEquals(order,orderRepository.getOrderById(id));
+    }
 }

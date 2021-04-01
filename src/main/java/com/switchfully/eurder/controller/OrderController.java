@@ -50,4 +50,18 @@ public class OrderController {
         return orderService.makeReport(ordersByUser);
     }
 
+    @PostMapping("reorder/{orderId}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public OrderDto reorderPreviousOrder(@PathVariable("orderId") String id,
+                                         @RequestHeader String authToken) {
+        User user = userService.assertRegisteredUser(authToken);
+        Order previousOrder = orderService.getOrderById(id);
+        orderService.assertOrderMadeByCurrentUser(previousOrder,user);
+        List<OrderUnit> orderUnitsWithShippingDate = orderService.calculateShippingDate(previousOrder.getOrderUnits());
+        List<OrderUnit> orderUnitsWithShippingDateAndUpdatedPrice =
+                orderService.updatePriceItems(orderUnitsWithShippingDate);
+        Order newOrder = orderService.createOrder(orderUnitsWithShippingDateAndUpdatedPrice,user);
+        return orderMapper.toDto(newOrder);
+    }
+
 }

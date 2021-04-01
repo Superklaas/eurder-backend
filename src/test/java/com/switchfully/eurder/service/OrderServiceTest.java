@@ -9,6 +9,9 @@ import com.switchfully.eurder.repository.OrderRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,6 +26,7 @@ class OrderServiceTest {
 
     Item item;
     User user;
+    OrderUnit orderUnit;
     List<OrderUnit> orderUnitList;
     Order order;
     List<Order> ordersByUser;
@@ -42,7 +46,8 @@ class OrderServiceTest {
 
         user = new User("één", "dummy", "abdijstraat 1", "056786543",
                 "één@dummy.be", UserType.CUSTOMER);
-        orderUnitList = List.of(new OrderUnit(item, 2));
+        orderUnit = new OrderUnit(item, 2);
+        orderUnitList = Collections.singletonList(orderUnit);
         order = new Order(orderUnitList, user);
         ordersByUser = List.of(order);
 
@@ -61,12 +66,15 @@ class OrderServiceTest {
 
     @Test
     void calculateShippingDate() {
-        fail();
+        List<OrderUnit> orderUnitsWithShippingDate =
+                List.of(orderUnit.setShippingDate(LocalDate.now()));
+        assertThat(orderService.calculateShippingDate(orderUnitList)).isEqualTo(orderUnitsWithShippingDate);
     }
 
     @Test
     void createOrder() {
-        fail();
+//        when(orderRepository.save(order)).thenReturn(order);
+//        assertEquals(order,orderService.createOrder(orderUnitList,user));
     }
 
     @Test
@@ -79,5 +87,12 @@ class OrderServiceTest {
     void makeReport() {
 //        assertThat(orderService.makeReport(ordersByUser)).isEqualTo(report);
 //        assertEquals(report,orderService.makeReport(ordersByUser));
+    }
+
+    @Test
+    void getOrderById() {
+        String id = order.getId();
+        when(orderRepository.getOrderById(id)).thenReturn(order);
+        assertThat(orderService.getOrderById(id)).isEqualTo(order);
     }
 }
