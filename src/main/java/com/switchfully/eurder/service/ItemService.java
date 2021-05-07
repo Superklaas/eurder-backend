@@ -37,4 +37,8 @@ public class ItemService {
                 .setPrice(updateItemDto.getPrice())
                 .setStock(updateItemDto.getStock());
     }
+
+    public void deleteItem(Item item) {
+        itemRepository.delete(item);
+    }
 }

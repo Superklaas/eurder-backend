@@ -48,4 +48,8 @@ public class ItemRepository {
         }
         return itemMap.get(id);
     }
+
+    public void delete(Item item) {
+        itemMap.remove(item.getId());
+    }
 }

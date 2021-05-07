@@ -55,6 +55,13 @@ public class ItemController {
         return itemMapper.toDto(updatedItem);
     }
 
+    @DeleteMapping(path = "{itemId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteItem(@PathVariable("itemId") String id,@RequestHeader String authToken) {
+        userService.assertAdmin(authToken);
+        itemService.deleteItem(itemService.getItemById(id));
+    }
+
 
 
 }
