@@ -23,20 +23,20 @@ public class UserController {
         this.userMapper = userMapper;
     }
 
-    @PostMapping("createCustomer")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public UserDto createNewCustomer(@RequestBody CreateUserDto input) {
         return userMapper.toDto(userService.createUser(userMapper.toCustomer(input)));
     }
 
-    @GetMapping("getAll")
+    @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<UserDto> getAllUsers(@RequestHeader String authToken) {
         userService.assertAdmin(authToken);
         return userMapper.toDto(userService.getAllUsers());
     }
 
-    @GetMapping(path = "getById/{userId}")
+    @GetMapping(path = "{userId}")
     @ResponseStatus(HttpStatus.OK)
     public UserDto getUserById(@PathVariable("userId") String id,
                                @RequestHeader String authToken) {

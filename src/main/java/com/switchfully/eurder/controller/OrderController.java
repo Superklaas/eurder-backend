@@ -31,7 +31,7 @@ public class OrderController {
         this.userService = userService;
     }
 
-    @PostMapping("create")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public OrderDto createOrder(@RequestBody List<OrderUnitDto> orderUnitDtos,
                                 @RequestHeader String authToken) {

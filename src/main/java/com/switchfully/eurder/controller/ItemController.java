@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("items")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ItemController {
 
     private final ItemService itemService;
@@ -28,7 +29,7 @@ public class ItemController {
         this.userService = userService;
     }
 
-    @PostMapping("create")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ItemDto createItem(@RequestBody CreateItemDto input,
                               @RequestHeader String authToken) {
@@ -36,14 +37,14 @@ public class ItemController {
         return itemMapper.toDto(itemService.createItem(itemMapper.toItem(input)));
     }
 
-    @GetMapping("getAll")
+    @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<ItemDto> getAllItems(@RequestHeader String authToken) {
         userService.assertAdmin(authToken);
         return itemMapper.toDto(itemService.getAllItems());
     }
 
-    @PutMapping(path = "update/{itemId}")
+    @PutMapping(path = "{itemId}")
     @ResponseStatus(HttpStatus.OK)
     public ItemDto updateItem(@PathVariable("itemId") String id,
                               @RequestBody UpdateItemDto updateItemDto,
