@@ -44,6 +44,14 @@ public class ItemController {
         return itemMapper.toDto(itemService.getAllItems());
     }
 
+    @GetMapping(path = "{itemId}")
+    @ResponseStatus(HttpStatus.OK)
+    public ItemDto getItemById(@PathVariable("itemId") String id,
+                               @RequestHeader String authToken) {
+        userService.assertAdmin(authToken);
+        return itemMapper.toDto(itemService.getItemById(id));
+    }
+
     @PutMapping(path = "{itemId}")
     @ResponseStatus(HttpStatus.OK)
     public ItemDto updateItem(@PathVariable("itemId") String id,
