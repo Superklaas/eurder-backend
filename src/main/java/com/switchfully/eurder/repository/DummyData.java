@@ -17,6 +17,9 @@ public class DummyData {
 
     private final Item item1 = new Item("appel", "lekker", 2, 20);
     private final Item item2 = new Item("peer", "lekker", 2, 20);
+    private final Item item3 = new Item("banaan", "lekker", 2, 20);
+    private final Item item4 = new Item("citroen", "lekker", 2, 20);
+    private final Item item5 = new Item("sinaasappel", "lekker", 2, 20);
 
     private final OrderUnit orderUnit1 = new OrderUnit(item1, 15);
     private final OrderUnit orderUnit2 = new OrderUnit(item2, 15);
@@ -30,7 +33,7 @@ public class DummyData {
 
     @Bean
     public List<Item> getItems() {
-        return List.of(item1, item2);
+        return List.of(item1, item2, item3, item4, item5);
     }
 
     @Bean
