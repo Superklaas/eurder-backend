@@ -14,10 +14,10 @@
     <artifactId>eurder</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>eurder</name>
-    <description>Eurder project (self evalutation)</description>
+    <description>Eurder project (self evaluation)</description>
 
     <properties>
-        <java.version>11</java.version>
+        <java.version>16</java.version>
     </properties>
 
     <dependencies>
